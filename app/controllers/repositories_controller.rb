@@ -1,9 +1,8 @@
 class RepositoriesController < ApplicationController
-	PER_PAGE = 90
+	PER_PAGE = 50
 
   def index
-	  data = fetch_and_paginate_data if params[:search].present?
-	  return data
+	  fetch_and_paginate_data if params[:search].present?
   end
 
   private
@@ -12,8 +11,8 @@ class RepositoriesController < ApplicationController
   	set_api_limitation_message
   	@repositories = call_github_api(params[:search], params[:page])
 		@paginated_data = @repositories.paginate(per_page: PER_PAGE)
-		dummy_array = Array.new(@total_entries.to_i)
-		@collection_size_objects = dummy_array.paginate(page: params[:page], per_page: PER_PAGE)
+		temp_array = Array.new(@total_entries.to_i)
+		@collection_size_objects = temp_array.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def set_api_limitation_message

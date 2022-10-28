@@ -26,8 +26,8 @@ class RepositoriesController < ApplicationController
   def call_github_api(query, page)
   	http_call = URI.open("https://api.github.com/search/repositories?q=#{query}&per_page=#{PER_PAGE}&page=#{page}").read
 		parsed_respone = JSON.parse(http_call)
-		response = parsed_respone.with_indifferent_access
-		@total_entries = response[:total_count]
-		response[:items]
+		response_hash = parsed_respone.with_indifferent_access
+		@total_entries = response_hash[:total_count]
+		response_hash[:items]
   end
 end

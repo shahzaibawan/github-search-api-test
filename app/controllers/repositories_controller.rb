@@ -1,8 +1,8 @@
 class RepositoriesController < ApplicationController
-	PER_PAGE = 97
+	PER_PAGE = 101
 
   def index
-		return fetch_and_paginate_data if params[:search].present?
+	  fetch_and_paginate_data if params[:search].present?
   end
 
   private
